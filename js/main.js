@@ -20,3 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ==========================================================================
+// CONTACT FORM — Formspree AJAX submit
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('#contact-form');
+  const successMsg = document.querySelector('#form-success');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.reset();
+          form.style.display = 'none';
+          successMsg.classList.add('show');
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        alert('Something went wrong. Please try again or email us directly.');
+      }
+    });
+  }
+});

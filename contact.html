@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Pixel & Pixel</title>
+  <meta name="description" content="Big-brand content, smarter pricing. Pixel & Pixel is a Colombo-based social media and content partner for Sri Lankan SMEs ready to grow online.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">PIXEL <span>&</span> PIXEL</a>
+
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="contact.html" class="btn btn-primary">Book a Call</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<main>
+
+    <!-- PAGE INTRO -->
+    <section class="hero">
+      <div class="container">
+        <span class="section-label">Get Started</span>
+        <h1>Let's start with the <span class="text-accent">Trial Package</span> —<br>low risk, real results.</h1>
+        <p class="lead">A simple way to begin building your online presence with confidence.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT LAYOUT -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-layout">
+
+          <div class="contact-methods">
+            <div class="card">
+              <h3>Email</h3>
+              <a href="mailto:pixelandpixel.admin@gmail.com">pixelandpixel.admin@gmail.com</a>
+            </div>
+            <div class="card">
+              <h3>Instagram</h3>
+              <a href="https://instagram.com/pixel.and.pixel" target="_blank" rel="noopener">@pixel.and.pixel</a>
+            </div>
+            <div class="card">
+              <p class="text-muted">Reach out directly — we'll recommend a package based on your goals and current presence, not push you toward the most expensive option.</p>
+            </div>
+          </div>
+
+          <div>
+            <form id="contact-form" class="contact-form" action="https://formspree.io/f/maqgokyr" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="business">Business name</label>
+                <input type="text" id="business" name="business">
+              </div>
+              <div class="form-group">
+                <label for="package">Interested in</label>
+                <select id="package" name="package">
+                  <option value="Not sure yet">Not sure yet</option>
+                  <option value="Trial">Trial — LKR 8,990 one-time</option>
+                  <option value="Foundation">Foundation — LKR 35,990/mo</option>
+                  <option value="Growth">Growth — LKR 55,990/mo</option>
+                  <option value="Scale">Scale — LKR 89,990/mo</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Tell us about your business</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <p class="form-note">We typically reply within 1–2 business days.</p>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <p id="form-success" class="form-success">Thanks — we've received your message and will be in touch soon.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="text-muted">&copy; 2026 Pixel & Pixel. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="mailto:pixelandpixel.admin@gmail.com">Email</a>
+        <a href="https://instagram.com/pixel.and.pixel" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
