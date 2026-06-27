@@ -346,3 +346,48 @@ button {
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   ABOUT PAGE — vision step flow
+   ========================================================================== */
+
+.step-flow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.step-flow .card {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+
+.step-arrow {
+  color: var(--color-text-faint);
+  font-size: var(--fs-lg);
+  flex-shrink: 0;
+}
+
+.mission-box {
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--fs-md);
+  max-width: 720px;
+  margin: var(--space-lg) auto 0;
+}
+
+@media (max-width: 768px) {
+  .step-flow {
+    flex-direction: column;
+  }
+  .step-arrow {
+    transform: rotate(90deg);
+  }
+}
