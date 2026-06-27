@@ -110,3 +110,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.insertBefore(layer, document.body.firstChild);
 });
+
+// ==========================================================================
+// CARD TILT — pricing/gap cards tilt toward cursor position
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tiltCards = document.querySelectorAll('.pricing-card, .gap-card');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    tiltCards.forEach((card) => {
+card.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+
+          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+});
+
+// ==========================================================================
+// COUNT-UP — pricing numbers animate from 0 when scrolled into view
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const priceEls = document.querySelectorAll('.pricing-price');
+
+  priceEls.forEach((el) => {
+    const match = el.textContent.match(/[\d,]+/);
+    if (!match) return;
+
+    const targetValue = parseInt(match[0].replace(/,/g, ''), 10);
+    const suffix = el.querySelector('span') ? el.querySelector('span').outerHTML : '';
+    const prefix = el.textContent.split(match[0])[0];
+
+    el.dataset.target = targetValue;
+    el.dataset.prefix = prefix;
+    el.dataset.suffix = suffix;
+  });
+
+  if ('IntersectionObserver' in window && priceEls.length) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    priceEls.forEach((el) => counterObserver.observe(el));
+  }
+
+  function animateCount(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const prefix = el.dataset.prefix;
+    const suffix = el.dataset.suffix;
+    const duration = 900;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+
+      el.innerHTML = `${prefix}${current.toLocaleString()} ${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.innerHTML = `${prefix}${target.toLocaleString()} ${suffix}`;
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+});

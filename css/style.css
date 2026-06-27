@@ -1133,3 +1133,25 @@ body > *:not(.ambient-layer) {
   position: relative;
   z-index: 1;
 }
+
+/* ==========================================================================
+   CARD TILT + PRICING COUNT-UP
+   ========================================================================== */
+
+.pricing-card,
+.gap-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pricing-price.counting {
+  min-width: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card,
+  .gap-card {
+    transform: none !important;
+  }
+}
