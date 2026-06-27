@@ -1155,3 +1155,33 @@ body > *:not(.ambient-layer) {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   TIMELINE LINE-DRAW — connector line grows as you scroll, circles light up
+   ========================================================================== */
+
+.timeline::before {
+  height: var(--line-progress, 0%);
+  transition: height 0.25s linear;
+}
+
+.timeline-num {
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.timeline-num.is-lit {
+  background: var(--color-accent);
+  border-color: var(--color-accent-bright);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+  color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline::before {
+    height: 100% !important;
+    transition: none;
+  }
+  .timeline-num {
+    transition: none;
+  }
+}

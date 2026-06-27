@@ -200,3 +200,46 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(tick);
   }
 });
+
+// ==========================================================================
+// TIMELINE LINE-DRAW — connector line grows on scroll, circles light up
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const timeline = document.querySelector('.timeline');
+  if (!timeline) return;
+
+  const line = timeline; // ::before pseudo-element height is set via a CSS var
+  const nums = timeline.querySelectorAll('.timeline-num');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) return;
+
+  function updateLine() {
+    const rect = timeline.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+
+    // How far we've scrolled into the timeline, as a 0–1 fraction
+    const scrolledPast = viewportH * 0.75 - rect.top;
+    const totalHeight = rect.height;
+    const progress = Math.max(0, Math.min(1, scrolledPast / totalHeight));
+
+    timeline.style.setProperty('--line-progress', `${progress * 100}%`);
+
+    nums.forEach((num) => {
+      const numRect = num.getBoundingClientRect();
+      const numCenter = numRect.top + numRect.height / 2;
+      if (numCenter < viewportH * 0.75) {
+        num.classList.add('is-lit');
+      } else {
+        num.classList.remove('is-lit');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateLine);
+  });
+
+  updateLine(); // run once on load in case the timeline is already in view
+});
