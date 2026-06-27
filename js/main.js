@@ -83,3 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   }
 });
+
+// ==========================================================================
+// AMBIENT ORBS — single fixed background layer, visible behind whole page
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const layer = document.createElement('div');
+  layer.className = 'ambient-layer';
+
+  const orbs = [
+    { size: 'size-lg', tone: 'tone-a', top: '5%',  left: '8%',  drift: 'drift-1' },
+    { size: 'size-md', tone: 'tone-b', top: '15%', left: '78%', drift: 'drift-2' },
+    { size: 'size-md', tone: 'tone-c', top: '45%', left: '15%', drift: 'drift-3' },
+    { size: 'size-lg', tone: 'tone-b', top: '65%', left: '70%', drift: 'drift-1' },
+    { size: 'size-sm', tone: 'tone-a', top: '85%', left: '40%', drift: 'drift-2' }
+  ];
+
+  orbs.forEach((o) => {
+    const orb = document.createElement('div');
+    orb.className = `bg-orb ${o.size} ${o.tone} ${o.drift}`;
+    orb.style.top = o.top;
+    orb.style.left = o.left;
+    layer.appendChild(orb);
+  });
+
+  document.body.insertBefore(layer, document.body.firstChild);
+});
